@@ -1,8 +1,8 @@
 % build the longest possible hamilton cycle in a m*n rechtangle
 % every cell is counted as a vertice
 
-#const m = 5. %height of the rechtangle
-#const n = 5. %length of the rechtangle
+#const m = 5. %length of the rechtangle
+#const n = 5. %height of the rechtangle
 #const l = m*n. % maximal length of the snake
 
 f(1..m,1..n).
