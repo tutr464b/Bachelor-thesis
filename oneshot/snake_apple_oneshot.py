@@ -111,7 +111,7 @@ for i in range(2, L + 1):
 
 
     ctl_naive = Control("0")
-    ctl_naive.load(r"C:\Users\tuang\Desktop\thesis_asp\snake_apple_naive_shortest_path.lp")
+    ctl_naive.load("path/to/naive/snake_apple_naive_shortest_path.lp")
     ctl_naive.add("base", [], r"#const m = " + str(M) + ".")
     ctl_naive.add("base", [], r"#const n = " + str(N) + ".")
     ctl_naive.ground([("base", []), ("add_snake", [Number(i)])])
