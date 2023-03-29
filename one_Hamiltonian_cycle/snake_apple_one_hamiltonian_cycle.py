@@ -78,6 +78,7 @@ grounding_time += end_time - time_start
 total_time += end_time - time_start
 
 for i in range(2, L+1):
+    iteration = i - 1
     # the following part is to measure the surplus step taken 
     ctl_naive = Control("0")
     ctl_naive.load("path/to/naive/snake_apple_naive_shortest_path.lp")
@@ -166,6 +167,7 @@ for i in range(2, L+1):
     snake_solution.append(snake)
 
 surplus_step = [actual_paths[i] - shortest_paths[i] for i in range(len(actual_paths))]
+print("Coverage " + str(iteration/L))
 print("surplus steps taken " + str(surplus_step))
 print("total computing time " + str(total_time))
 print("ASP grounding time " + str(grounding_time))
