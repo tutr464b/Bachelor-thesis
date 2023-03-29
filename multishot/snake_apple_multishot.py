@@ -141,21 +141,9 @@ for i in range(2, L + 1):
             step_length.append(j[2] - 1)
             break    
 
-
-    # with open(r"C:\Users\tuang\Desktop\thesis_asp\snake_apple_multishot_surplus_8.txt", "a") as f:
-    #     f.write(str(step_length[-1] - shortest_path) + ", ")
-    # with open(r"C:\Users\tuang\Desktop\thesis_asp\snake_apple_multishot_snake_8.txt", "a") as f:
-    #     f.write(str(snake) + ", ")
-    # with open(r"C:\Users\tuang\Desktop\thesis_asp\snake_apple_multishot_solving_time_8.txt", "a") as f:
-    #     f.write(str(solving_time) + ", ")
-    # with open(r"C:\Users\tuang\Desktop\thesis_asp\snake_apple_multishot_grounding_time_8.txt", "a") as f:
-    #     f.write(str(grounding_time) + ", ")
-    # with open(r"C:\Users\tuang\Desktop\thesis_asp\snake_apple_multishot_total_time_8.txt", "a") as f:
-    #     f.write(str(total_time) + ", ")
-
 surplus = [step_length[i] - shortest_paths[i] for i in range(len(step_length))]
 
-print("Iteration " + str(iteration))
+print("Coverage " + str(iteration/L))
 print("surplus steps taken " + str(surplus_step))
 print("total computing time " + str(total_time))
 print("ASP grounding time " + str(grounding_time))
