@@ -45,7 +45,7 @@ shortest_paths = []
 
 time_start = time.time()
 ctl = Control("0")
-ctl.load(r"C:\Users\tuang\Desktop\thesis_asp\snake_apple_multishot.lp")
+ctl.load("path/to/optimized/snake_apple_multishot.lp")
 
 ctl.add("base", [], r"#const m = " + str(M) + ".")
 ctl.add("base", [], r"#const n = " + str(N) + ".")
@@ -116,7 +116,7 @@ for i in range(2, L + 1):
     total_time += time_end - time_start
 
     ctl_naive = Control("0")
-    ctl_naive.load(r"C:\Users\tuang\Desktop\thesis_asp\snake_apple_naive_shortest_path.lp")
+    ctl_naive.load("path/to/naive/snake_apple_naive_shortest_path.lp")
     ctl_naive.add("base", [], r"#const m = " + str(M) + ".")
     ctl_naive.add("base", [], r"#const n = " + str(N) + ".")
     ctl_naive.ground([("base", []), ("add_snake", [Number(i)])])
@@ -143,19 +143,14 @@ for i in range(2, L + 1):
             step_length.append(j[2] - 1)
             break
 
-
 surplus = [step_length[i] - shortest_paths[i] for i in range(len(step_length))]
-with open(r"C:\Users\tuang\Desktop\thesis_asp\snake_apple_optimized_snake_8.txt", "a") as f:
-    f.write(str(iteration) + ", ")
+print("surplus steps taken " + str(surplus_step))
+print("Coverage " + str(iteration/L))
+print("total computing time " + str(total_time))
+print("ASP grounding time " + str(grounding_time))
+print("ASP solving time " + str(solving_time))
 
-with open(r"C:\Users\tuang\Desktop\thesis_asp\snake_apple_optimized_surplus_8.txt", "a") as f:
-    f.write(str(surplus) + ", ")
-with open(r"C:\Users\tuang\Desktop\thesis_asp\snake_apple_optimized_total_time_8.txt", "a") as f:
-    f.write(str(total_time) + ", ")
-with open(r"C:\Users\tuang\Desktop\thesis_asp\snake_apple_optimized_grounding_time_8.txt", "a") as f:
-    f.write(str(grounding_time) + ", ")
-with open(r"C:\Users\tuang\Desktop\thesis_asp\snake_apple_optimized_solving_time_8.txt", "a") as f:
-    f.write(str(solving_time) + ", ")
+
 # # now visualize the solution
 
 # window = Tk()
