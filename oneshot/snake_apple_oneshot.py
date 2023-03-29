@@ -131,6 +131,7 @@ for i in range(2, L + 1):
 
 surplus = [step_length[i] - shortest_paths[i] for i in range(len(step_length))]
 print("surplus steps taken " + str(surplus_step))
+print("Coverage " + str(iteration/L))
 print("total computing time " + str(total_time))
 print("ASP grounding time " + str(grounding_time))
 print("ASP solving time " + str(solving_time))
