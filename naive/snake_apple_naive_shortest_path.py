@@ -1,10 +1,15 @@
+import time
 from clingo import *
 import random
-import tkinter
-import time
 
-M = 4
-N = 4
+total_time = 0
+grounding_time = 0
+solving_time = 0
+
+time_start = time.time()
+
+M = 8
+N = 8
 L = M*N
 
 
@@ -26,29 +31,37 @@ snake_solution = []
 snake_solution.append(snake)
 path_solution = []
 apple_solution = []
-time_interval = []
+
+time_end = time.time()
+total_time += time_end - time_start
 
 for i in range(2, L + 1):
-    print("Step: ", i - 1)
     time_start = time.time()
     ctl = Control("0")
     ctl.load(r"C:\Users\tuang\Desktop\thesis_asp\snake_apple_naive_shortest_path.lp")
     ctl.add("base", [], r"#const m = " + str(M) + ".")
     ctl.add("base", [], r"#const n = " + str(N) + ".")
     ctl.ground([("base", []), ("add_snake", [Number(i)])])
+    time_end = time.time()
+    grounding_time += time_end - time_start
+    total_time += time_end - time_start
+    time_start = time.time()
     apple_x, apple_y = random_apple(snake)
     apple_solution.append([apple_x, apple_y])
-    print("Apple position: ", apple_x, apple_y)
     ctl.assign_external(Function("apple", [Number(apple_x), Number(apple_y)]), True)
     assumptions = [(Function("snake", [Number(x), Number(y), Number(z)]), True) for x, y, z in snake]
+    time_end = time.time()
+    total_time += time_end - time_start
+    time_start = time.time()
     result = ctl.solve(yield_=True, assumptions=assumptions)
     time_end = time.time()
-    time_interval.append(time_end - time_start)
+    solving_time += time_end - time_start
+    total_time += time_end - time_start
+    time_start = time.time()
     results = []
     for model in result:
         results.append(model.symbols(atoms=True))
     if len(results) == 0:
-        print("No solution")
         break
     path = []
     new_snake = []
@@ -62,15 +75,17 @@ for i in range(2, L + 1):
     snake = new_snake
     snake_solution.append(snake)
     path_solution.append(path)
-    print("snake :", snake)
-    print("path :", path)
+    time_end = time.time()
+    total_time += time_end - time_start
 
-print(snake_solution)
-print(path_solution)
-print(apple_solution)
-print(time_interval)
-# # now visualize the solution in pygmae
-
+# here total computing time, ASP grounding time, ASP solving time, number of steps taken can be stored in files or printed out here
+print("total time" + str(total_time))
+print("ASP grounding time" + str(grounding_time))
+print("ASP solving time" + str(solving_time))
+    
+## now visualize the solution
+## uncomment to visualize
+# import tkinter
 # window = tkinter.Tk()
 
 # GAME_WIDTH = M*50
