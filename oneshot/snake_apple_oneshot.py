@@ -50,7 +50,7 @@ for i in range(2, L + 1):
 
     time_start = time.time()
     ctl = Control("0")
-    ctl.load(r"C:\Users\tuang\Desktop\thesis_asp\snake_apple_oneshot.lp")
+    ctl.load("path/to/oneshot/snake_apple_oneshot.lp")
     ctl.add("base", [], r"#const m = " + str(M) + ".")
     ctl.add("base", [], r"#const n = " + str(N) + "." )
 
@@ -130,17 +130,10 @@ for i in range(2, L + 1):
     shortest_paths.append(shortest_path)
 
 surplus = [step_length[i] - shortest_paths[i] for i in range(len(step_length))]
-with open(r"C:\Users\tuang\Desktop\thesis_asp\snake_apple_oneshot_surplus_8.txt", "a") as f:
-    f.write(str(surplus) + ", ")
-with open(r"C:\Users\tuang\Desktop\thesis_asp\snake_apple_oneshot_snake_8.txt", "a") as f:
-    f.write(str(iteration) + ", ")
-
-with open(r"C:\Users\tuang\Desktop\thesis_asp\snake_apple_oneshot_total_time_8.txt", "a") as f:
-    f.write(str(total_time) + ", ")
-with open(r"C:\Users\tuang\Desktop\thesis_asp\snake_apple_oneshot_grounding_time_8.txt", "a") as f:
-    f.write(str(grounding_time) + ", ")
-with open(r"C:\Users\tuang\Desktop\thesis_asp\snake_apple_oneshot_solving_time_8.txt", "a") as f:
-    f.write(str(solving_time) + ", ")
+print("surplus steps taken " + str(surplus_step))
+print("total computing time " + str(total_time))
+print("ASP grounding time " + str(grounding_time))
+print("ASP solving time " + str(solving_time))
 
 # now visualize the solution
 
